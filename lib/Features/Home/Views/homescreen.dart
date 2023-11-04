@@ -77,107 +77,10 @@ class _HomeScreenState extends State<HomeScreen>
             const SizedBox(
               height: 20,
             ),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(12),
-            //     color: const Color(0xfffff5f5),
-            //   ),
-            //   width: double.infinity,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: Stack(
-            //       children: [
-            //         Row(
-            //           children: [
-            //             Container(
-            //               width: 150,
-            //               child: Column(
-            //                 children: [
-            //                   const Text(
-            //                     'Multi-Services for Your Real Estate Needs',
-            //                     style: TextStyle(
-            //                         fontWeight: FontWeight.bold, fontSize: 14),
-            //                   ),
-            //                   const SizedBox(
-            //                     height: 15,
-            //                   ),
-            //                   CustomButton(
-            //                     onTap: () {},
-            //                     text: 'Order',
-            //                     color: MyColors.redColor,
-            //                     height: 30,
-            //                     width: 140,
-            //                     fontColor: Colors.white,
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //             const Spacer(),
-            //             Image.asset('assets/images/main page.png'),
-            //           ],
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            // Center(
-            //   child: DotsIndicator(
-            //     dotsCount: 4,
-            //     decorator: const DotsDecorator(
-            //       color: Colors.grey, // Inactive color
-            //       activeColor: MyColors.seconedColor,
-            //     ),
-            //   ),
-            // ),
-            // CarouselSlider(
-            //   carouselController: buttonCarouselController,
-            //   items: ,
-            //   options: CarouselOptions(
-            //     onPageChanged: (index, reason) {
-            //       // state.currentIndexForHomeSlider = index;
-            //
-            //       debugPrint(index.toString());
-            //       Stack(
-            //         children: [
-            //           Row(
-            //             children: [
-            //               Container(
-            //                 width: 150,
-            //                 child: Column(
-            //                   children: [
-            //                     const Text(
-            //                       'Multi-Services for Your Real Estate Needs',
-            //                       style: TextStyle(
-            //                           fontWeight: FontWeight.bold, fontSize: 14),
-            //                     ),
-            //                     const SizedBox(
-            //                       height: 15,
-            //                     ),
-            //                     CustomButton(
-            //                       onTap: () {},
-            //                       text: 'Order',
-            //                       color: MyColors.redColor,
-            //                       height: 30,
-            //                       width: 140,
-            //                       fontColor: Colors.white,
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ),
-            //               const Spacer(),
-            //               Image.asset('assets/images/main page.png'),
-            //             ],
-            //           )
-            //         ],
-            //       );
-            //     },
-            //     autoPlay: true,
-            //     viewportFraction: 1,
-            //   ),
-            // ),
+
             CarouselSlider(
-              options: CarouselOptions(height: 170.0,),
-              items: [1,2,3,].map((i) {
+              options: CarouselOptions(height: 170.0,autoPlay: true,aspectRatio: 1,viewportFraction: 1),
+              items: data.map((i) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
@@ -186,43 +89,42 @@ class _HomeScreenState extends State<HomeScreen>
                         decoration: BoxDecoration(
                             color: MyColors.seconedColor,
                         ),
-                        child:Stack(
+                        child:Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 100,
-                                  child: Column(
-                                    children: [
-                                      const Text(
-                                        'Multi-Services for Your Real Estate Needs',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold, fontSize: 14),
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      CustomButton(
-                                        onTap: () {},
-                                        text: 'Order',
-                                        color: MyColors.redColor,
-                                        height: 30,
-                                        width: 140,
-                                        fontColor: Colors.white,
-                                      ),
-                                    ],
+                            Expanded(
+                              child: Column(
+
+                                children: [
+                                   Text(
+                                    i.text,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 14),
                                   ),
-                                ),
-                                const Spacer(),
-                                Image.asset('assets/images/main page.png'),
-                              ],
-                            )
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  CustomButton(
+                                    onTap: () {},
+                                    text: i.buttonText,
+                                    color: MyColors.redColor,
+                                    height: 30,
+                                    width: 140,
+                                    fontColor: Colors.white,
+                                  ),
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.center,
+                              ),
+                            ),
+
+                            Expanded(child: Image.asset(i.image)),
                           ],
                         ),);
 
                   },
                 );
               }).toList(),
+
             ),
             const SizedBox(
               height: 15,
@@ -326,6 +228,7 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ),
             Expanded(child: tabs[selectedindex]),
+
           ],
         ),
       ),
@@ -344,4 +247,19 @@ class _HomeScreenState extends State<HomeScreen>
     OrdersTab(),
   ];
   int selectedindex = 0;
+
+
+ List< CarouselData > data = [
+   CarouselData(text:'Multi-Services for Your Real Estate Needs1' ,image: 'assets/images/main page.png' ,buttonText:'Order1' ),
+   CarouselData(text:'Multi-Services for Your Real Estate Needs2' ,image: 'assets/images/main page.png' ,buttonText:'Order2' ),
+   CarouselData(text:'Multi-Services for Your Real Estate Needs3' ,image: 'assets/images/main page.png' ,buttonText:'Order3' ),
+ ];
+}
+
+class CarouselData{
+  String text;
+  String image;
+  String buttonText;
+
+  CarouselData({required this.text,required this.image,required this.buttonText});
 }
