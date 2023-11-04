@@ -38,7 +38,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   dots_indicator: ^2.1.0
   carousel_slider:
-  http:
+  dio:
 
 
 #  flutter_svg: ^2.0.9
